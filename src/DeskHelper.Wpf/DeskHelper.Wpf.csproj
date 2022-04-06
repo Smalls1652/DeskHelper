@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+		<RootNamespace>DeskHelper.Wpf</RootNamespace>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <OutputType>WinExe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="6.0.200-preview.14.5099" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\DeskHelper.Lib\DeskHelper.Lib.csproj" />
+      <ProjectReference Include="..\DeskHelper.Blazor\DeskHelper.Blazor.csproj" />
+    </ItemGroup>
+</Project>
