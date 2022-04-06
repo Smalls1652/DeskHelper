@@ -10,7 +10,7 @@ A Windows (MAUI and WPF) application to quickly get info about a device by utili
 
 ### `DeskHelper.Maui`
 
-A .NET MAUI/WinUI3 application utilizing Blazor Hybrid.
+A .NET MAUI/WinUI3 application utilizing Blazor Hybrid. The only targeted platform is Windows.
 
 ### `DeskHelper.Wpf`
 
@@ -31,7 +31,9 @@ A class library that contains models for getting information about the computer.
 > As of April 6th, 2022, [Visual Studio 2022 17.2 preview](https://visualstudio.microsoft.com/vs/preview/) with these two workloads installed:
 >  
 > * **.NET desktop development**
+>   * _Needed for WPF_
 > * **Mobile development with .NET**
+>   * _Needed for MAUI_
 
 **This section will be filled out later.**
 
