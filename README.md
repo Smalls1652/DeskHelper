@@ -18,7 +18,7 @@ A WPF application utilizing Blazor Hybrid.
 
 ### `DeskHelper.Blazor`
 
-The core Blazor pages/components that are used in the MAUI and WPF applications.
+The core Blazor pages/components that are used in the MAUI and WPF applications. This is separated from the MAUI and WPF projects, so that the same underlying Blazor code works for both of them.
 
 ### `DeskHelper.Lib`
 
