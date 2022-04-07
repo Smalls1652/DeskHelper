@@ -1,0 +1,4 @@
+{
+    "omnisharp.autoStart": true,
+    "omnisharp.defaultLaunchSolution": "${workspaceFolder}/DeskHelper.Wpf.sln"
+}
