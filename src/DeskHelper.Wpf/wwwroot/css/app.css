@@ -1,5 +1,18 @@
-﻿html, body {
+﻿:root {
+	--bs-celestial-blue: #438bcc;
+	--bs-indigo: #214565;
+}
+
+html, body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+	background-color: var(--bs-celestial-blue);
+}
+
+.bg-indigo {
+	background-color: var(--bs-indigo);
 }
 
 .valid.modified:not([type=checkbox]) {

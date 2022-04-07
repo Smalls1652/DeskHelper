@@ -1,5 +1,18 @@
-﻿html, body {
+﻿:root {
+	--bs-celestial-blue: #438bcc;
+	--bs-lapis-lazuli: #326899;
+}
+
+html, body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+	background-color: var(--bs-celestial-blue);
+}
+
+.bg-lapis-lazuli {
+	background-color: var(--bs-lapis-lazuli);
 }
 
 .valid.modified:not([type=checkbox]) {
