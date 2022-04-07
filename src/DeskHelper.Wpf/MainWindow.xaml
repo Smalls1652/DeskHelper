@@ -6,7 +6,7 @@
         xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
         xmlns:blazorpages="clr-namespace:DeskHelper.Blazor;assembly=DeskHelper.Blazor"
         mc:Ignorable="d"
-        Title="DeskHelper" Height="450" Width="800">
+        Title="DeskHelper" Height="720" Width="1280">
     <Grid>
         <blazor:BlazorWebView HostPage="wwwroot\index.html" Services="{StaticResource services}">
             <blazor:BlazorWebView.RootComponents>
