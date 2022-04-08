@@ -1,6 +1,6 @@
 ﻿:root {
 	--bs-celestial-blue: #438bcc;
-	--bs-lapis-lazuli: #326899;
+	--bs-indigo: #214565;
 }
 
 html, body {
@@ -11,8 +11,8 @@ body {
 	background-color: var(--bs-celestial-blue);
 }
 
-.bg-lapis-lazuli {
-	background-color: var(--bs-lapis-lazuli);
+.bg-indigo {
+	background-color: var(--bs-indigo);
 }
 
 .valid.modified:not([type=checkbox]) {
