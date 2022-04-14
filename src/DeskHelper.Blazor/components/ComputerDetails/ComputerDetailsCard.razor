@@ -1,0 +1,39 @@
+@namespace DeskHelper.Blazor.Components.ComputerDetails
+
+@inherits ComponentBase
+
+<div class="card shadow">
+    <div class="card-header">
+        <h2 class="card-title">
+            Computer details
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="list-group">
+            <div class="list-group-item shadow-sm">
+                <h5 class="mb-2">
+                    Computer name
+                </h5>
+                <MonospaceText>
+                    @InputComputerInfo.HostName
+                </MonospaceText>
+            </div>
+            <div class="list-group-item shadow-sm">
+                <h5 class="mb-2">
+                    Domain name
+                </h5>
+                <MonospaceText>
+                    @InputComputerInfo.ComputerDomainName
+                </MonospaceText>
+            </div>
+            <div class="list-group-item shadow-sm">
+                <h5 class="mb-2">
+                    Domain joined
+                </h5>
+                <MonospaceText>
+                    @InputComputerInfo.ComputerIsDomainJoined
+                </MonospaceText>
+            </div>
+        </div>
+    </div>
+</div>
