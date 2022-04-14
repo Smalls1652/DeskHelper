@@ -19,12 +19,14 @@ public partial class NetworkAdaptersList : ComponentBase
         if (OnlyUpNetworkAdapters is true)
         {
             _networkAdapters = InputNetworkAdapters.FindAll(
-                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceStatus is OperationalStatus.Up
+                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceStatus is OperationalStatus.Up && adapterInfo.InterfaceIsPhysical is true
             );
         }
         else
         {
-            _networkAdapters = InputNetworkAdapters;
+            _networkAdapters = InputNetworkAdapters.FindAll(
+                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceIsPhysical is true
+            );
         }
     }
 }
