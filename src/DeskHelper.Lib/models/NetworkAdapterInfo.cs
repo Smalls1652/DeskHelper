@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using SmallsOnline.Subnetting.Lib.Models;
 
 namespace DeskHelper.Lib.Models;
 
@@ -13,7 +14,21 @@ public class NetworkAdapterInfo
         InterfaceMACAddress = networkInterface.GetPhysicalAddress();
 
         IPInterfaceProperties interfaceProperties = networkInterface.GetIPProperties();
-        InterfaceIPv4Addresses = GetIPv4AddressesFromProperties(interfaceProperties);
+        
+        List<Dictionary<string, IPAddress>> ipAddressInfo = GetIPv4AddressesFromProperties(interfaceProperties);
+        if (ipAddressInfo.Count is not 0)
+        {
+            InterfaceIPv4Address = ipAddressInfo[0]["IPAddress"];
+            InterfaceSubnetMask = ipAddressInfo[0]["SubnetMask"];
+            InterfaceSubnetInfo = new(InterfaceIPv4Address, InterfaceSubnetMask);
+        }
+
+        List<IPAddress> gatewayAddresses = GetGatewaysFromProperties(interfaceProperties);
+        if (gatewayAddresses.Count is not 0)
+        {
+            InterfaceIPv4Gateway = gatewayAddresses[0];
+        }
+
         InterfaceDNSServers = GetDNSServersFromProperties(interfaceProperties);
 
         InterfaceStatus = networkInterface.OperationalStatus;
@@ -25,21 +40,39 @@ public class NetworkAdapterInfo
 
     public PhysicalAddress InterfaceMACAddress { get; set; }
 
-    public List<IPAddress> InterfaceIPv4Addresses { get; set; }
+    public IPAddress? InterfaceIPv4Address { get; set; }
 
-    public List<IPAddress> InterfaceDNSServers { get; set; }
+    public IPAddress? InterfaceSubnetMask { get; set; }
+
+    public IPAddress? InterfaceIPv4Gateway { get; set; }
+
+    public IPv4Subnet? InterfaceSubnetInfo { get; set; }
+
+    public List<IPAddress>? InterfaceDNSServers { get; set; }
 
     public OperationalStatus InterfaceStatus { get; set; }
 
-    private static List<IPAddress> GetIPv4AddressesFromProperties(IPInterfaceProperties interfaceProperties)
+    private static List<Dictionary<string, IPAddress>> GetIPv4AddressesFromProperties(IPInterfaceProperties interfaceProperties)
     {
-        List<IPAddress> ipAddresses = new();
+        List<Dictionary<string, IPAddress>> ipAddresses = new();
 
         foreach (UnicastIPAddressInformation addressInformationItem in interfaceProperties.UnicastAddresses)
         {
             if (addressInformationItem.Address.AddressFamily is AddressFamily.InterNetwork)
             {
-                ipAddresses.Add(addressInformationItem.Address);
+                Dictionary<string, IPAddress> ipAddressDict = new()
+                {
+                    {
+                        "IPAddress",
+                        addressInformationItem.Address
+                    },
+                    {
+                        "SubnetMask",
+                        addressInformationItem.IPv4Mask
+                    }
+                };
+
+                ipAddresses.Add(ipAddressDict);
             }
         }
 
@@ -59,5 +92,20 @@ public class NetworkAdapterInfo
         }
 
         return dnsServers;
+    }
+
+    private static List<IPAddress> GetGatewaysFromProperties(IPInterfaceProperties interfaceProperties)
+    {
+        List<IPAddress> gatewayAddresses = new();
+
+        foreach (GatewayIPAddressInformation gatewayItem in interfaceProperties.GatewayAddresses)
+        {
+            if (gatewayItem.Address.AddressFamily is AddressFamily.InterNetwork)
+            {
+                gatewayAddresses.Add(gatewayItem.Address);
+            }
+        }
+
+        return gatewayAddresses;
     }
 }
