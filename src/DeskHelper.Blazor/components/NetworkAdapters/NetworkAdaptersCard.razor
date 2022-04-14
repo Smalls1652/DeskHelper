@@ -1,0 +1,31 @@
+@namespace DeskHelper.Blazor.Components.NetworkAdapters
+
+@inherits ComponentBase
+
+<div class="card shadow">
+    <div class="card-header">
+        <h2>
+            Network adapters
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <ul class="list-group list-group-horizontal user-select-none">
+                    <li class="list-group-item filter-input-item"
+                        @onclick="() => _onlyUpNetworkAdapters = !_onlyUpNetworkAdapters">
+                        <input class="form-check-input me-1" type="checkbox" @bind="@_onlyUpNetworkAdapters" />
+                        <span class="fw-bold">
+                            Only up adapters
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <CascadingValue Name="inputAdapters" Value="@InputNetworkAdapters">
+                <NetworkAdaptersList OnlyUpNetworkAdapters="@_onlyUpNetworkAdapters" />
+            </CascadingValue>
+        </div>
+    </div>
+</div>

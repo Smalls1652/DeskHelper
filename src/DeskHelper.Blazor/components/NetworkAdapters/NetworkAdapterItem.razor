@@ -1,0 +1,144 @@
+@namespace DeskHelper.Blazor.Components.NetworkAdapters
+@using System.Net.NetworkInformation
+
+@inherits ComponentBase
+
+<div class="card shadow-sm">
+    <div
+        class="card-header text-white @(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "bg-success" : "bg-danger")">
+        <h3 class="card-title">
+            @AdapterItem.InterfaceName
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <h4>
+                    Details
+                </h4>
+                <div class="list-group">
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            IP Address
+                        </h5>
+                        <div class="mb-1">
+                            @if (AdapterItem.InterfaceIPv4Address is not null)
+                            {
+                                <MonospaceText>
+                                    @AdapterItem.InterfaceIPv4Address
+                                </MonospaceText>
+                            }
+                            else
+                            {
+                                <MonospaceText>
+                                    Not set
+                                </MonospaceText>
+                            }
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <h5 class="mb-2">
+                            Gateway
+                        </h5>
+                        <div class="mb-1">
+                            @if (AdapterItem.InterfaceIPv4Gateway is not null)
+                            {
+                                <MonospaceText>
+                                    @AdapterItem.InterfaceIPv4Gateway
+                                </MonospaceText>
+                            }
+                            else
+                            {
+                                <MonospaceText>
+                                    Not set
+                                </MonospaceText>
+                            }
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <h5 class="mb-2">
+                            DNS Servers
+                        </h5>
+                        <div class="mb-1">
+                            <ul class="list-group list-group-numbered">
+                                @if (AdapterItem.InterfaceDNSServers is not null &&
+                                AdapterItem.InterfaceDNSServers.Count is not 0)
+                                {
+                                    @foreach (IPAddress dnsServer in AdapterItem.InterfaceDNSServers)
+                                    {
+                                        <li class="list-group-item">
+                                            <MonospaceText>
+                                                @dnsServer
+                                            </MonospaceText>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="list-group-item">
+                                        <MonospaceText>
+                                            Not set
+                                        </MonospaceText>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <h4>
+                    Subnet Info
+                </h4>
+                <div class="list-group shadow-sm">
+                    @if (AdapterItem.InterfaceSubnetInfo is not null)
+                    {
+                        <div class="list-group-item">
+                            <h5 class="mb-2">
+                                Network ID
+                            </h5>
+                            <div class="mb-1">
+                                <MonospaceText>
+                                    @AdapterItem.InterfaceSubnetInfo
+                                </MonospaceText>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <h5 class="mb-2">
+                                Subnet Mask
+                            </h5>
+                            <div class="mb-1">
+                                <MonospaceText>
+                                    @AdapterItem.InterfaceSubnetInfo.SubnetMask
+                                </MonospaceText>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <h5 class="mb-2">
+                                Broadcast Address
+                            </h5>
+                            <div class="mb-1">
+                                <MonospaceText>
+                                    @AdapterItem.InterfaceSubnetInfo.BroadcastAddress
+                                </MonospaceText>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="list-group-item">
+                            <h5 class="mb-2">
+                                Invalid subnet info
+                            </h5>
+                            <div class="mb-1">
+                                <MonospaceText>
+                                    Not set
+                                </MonospaceText>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

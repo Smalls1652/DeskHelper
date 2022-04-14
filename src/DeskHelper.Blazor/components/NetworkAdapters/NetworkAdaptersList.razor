@@ -1,0 +1,13 @@
+@namespace DeskHelper.Blazor.Components.NetworkAdapters
+
+@inherits ComponentBase
+
+@if (_networkAdapters is not null)
+{
+    @foreach (NetworkAdapterInfo adapterItem in _networkAdapters)
+    {
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xxl-4 p-2">
+            <NetworkAdapterItem AdapterItem="@adapterItem" />
+        </div>
+    }
+}

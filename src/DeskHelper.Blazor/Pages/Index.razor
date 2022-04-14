@@ -2,77 +2,26 @@
 
 @page "/"
 <div class="container-fluid">
-    <div class="row">
+    <div class="row pt-2">
         <div class="col">
-            <h1>
-                DeskHelper
-            </h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <h2>
-                Hostname
-            </h2>
-            <span>
-                @_computerInfo.HostName
-            </span>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <h2>
-                Network adapters
-            </h2>
-            <div class="row">
-                @foreach (NetworkAdapterInfo adapterItem in _computerInfo.NetworkAdapters)
-                {
-                    <div class="col-4 p-2">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    @adapterItem.InterfaceName
-                                </h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h4>
-                                            IP Addresses
-                                        </h4>
-                                        <ul>
-                                            @foreach (IPAddress addressItem in adapterItem.InterfaceIPv4Addresses)
-                                            {
-                                                <li>
-                                                    @addressItem
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <h4>
-                                            DNS Servers
-                                        </h4>
-                                        <ul>
-                                            @foreach (IPAddress dnsServer in adapterItem.InterfaceDNSServers)
-                                            {
-                                                <li>
-                                                    @dnsServer
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
+            <div class="card shadow">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Hostname
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <span>
+                        @_computerInfo.HostName
+                    </span>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row pt-2 pb-3">
+        <div class="col">
+            <NetworkAdaptersCard InputNetworkAdapters="@_computerInfo.NetworkAdapters" />
         </div>
     </div>
 </div>
