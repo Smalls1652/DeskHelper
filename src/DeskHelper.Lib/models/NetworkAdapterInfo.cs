@@ -1,6 +1,8 @@
+using System.Management;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Text;
 using SmallsOnline.Subnetting.Lib.Models;
 
 namespace DeskHelper.Lib.Models;
@@ -11,7 +13,8 @@ public class NetworkAdapterInfo
     {
         InterfaceId = networkInterface.Id;
         InterfaceName = networkInterface.Name;
-        InterfaceMACAddress = networkInterface.GetPhysicalAddress();
+        InterfaceMACAddress = ConvertPhysicalAddressToString(networkInterface.GetPhysicalAddress());
+        InterfaceIsPhysical = GetIsInterfacePhysical(InterfaceMACAddress);
 
         IPInterfaceProperties interfaceProperties = networkInterface.GetIPProperties();
         
@@ -38,7 +41,9 @@ public class NetworkAdapterInfo
 
     public string InterfaceName { get; set; }
 
-    public PhysicalAddress InterfaceMACAddress { get; set; }
+    public string InterfaceMACAddress { get; set; }
+
+    public bool InterfaceIsPhysical { get; set; }
 
     public IPAddress? InterfaceIPv4Address { get; set; }
 
@@ -107,5 +112,49 @@ public class NetworkAdapterInfo
         }
 
         return gatewayAddresses;
+    }
+
+    private static string ConvertPhysicalAddressToString(PhysicalAddress physicalAddress)
+    {
+        string interfaceBaseMACAddressString = physicalAddress.ToString();
+        int interfaceBaseMACAddressStringLength = interfaceBaseMACAddressString.Length;
+        List<string> interfaceMACAddressOctets = new();
+
+        for (int i = 0; i < interfaceBaseMACAddressStringLength; i += 2)
+        {
+            string octetString = interfaceBaseMACAddressString.Substring(i, Math.Min(2, interfaceBaseMACAddressStringLength - 1));
+            interfaceMACAddressOctets.Add(octetString);
+        }
+
+        return string.Join(":", interfaceMACAddressOctets);
+    }
+
+    private static bool GetIsInterfacePhysical(string macAddress)
+    {
+        List<ManagementObject> netAdapters = new();
+        using (ManagementObjectSearcher objSearcher = new($"SELECT MACAddress,PhysicalAdapter FROM Win32_NetworkAdapter"))
+        {
+            foreach (ManagementObject managementObject in objSearcher.Get())
+            {
+                netAdapters.Add(managementObject);
+            }
+        }
+
+        bool isPhysical;
+
+        try
+        {
+            ManagementObject netAdapterProps = netAdapters.Find(
+                (ManagementObject item) => (string)item["MACAddress"] == macAddress
+            )!;
+
+            isPhysical = (bool)netAdapterProps["PhysicalAdapter"];
+        }
+        catch
+        {
+            isPhysical = false;
+        }
+
+        return isPhysical;
     }
 }
