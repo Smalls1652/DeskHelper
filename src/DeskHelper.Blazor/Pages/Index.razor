@@ -2,15 +2,26 @@
 
 @page "/"
 <div class="container-fluid">
-    <div class="row pt-2">
-        <div class="col">
-            <ComputerDetailsCard InputComputerInfo="@_computerInfo" />
+    @if (_computerInfo is null)
+    {
+        <div class="row pt-2">
+            <div class="col">
+                <LoadingCard />
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row pt-2">
+            <div class="col">
+                <ComputerDetailsCard InputComputerInfo="@_computerInfo" />
+            </div>
+        </div>
 
-    <div class="row pt-2 pb-3">
-        <div class="col">
-            <NetworkAdaptersCard InputNetworkAdapters="@_computerInfo.NetworkAdapters" />
+        <div class="row pt-2 pb-3">
+            <div class="col">
+                <NetworkAdaptersCard InputNetworkAdapters="@_computerInfo.NetworkAdapters" />
+            </div>
         </div>
-    </div>
+    }
 </div>

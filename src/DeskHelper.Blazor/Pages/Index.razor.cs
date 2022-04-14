@@ -5,5 +5,10 @@ namespace DeskHelper.Blazor;
 
 public partial class Index : ComponentBase
 {
-    private readonly ComputerInfo _computerInfo = new();
+    private ComputerInfo? _computerInfo;
+
+    protected override void OnInitialized()
+    {
+        _computerInfo = new();
+    }
 }
