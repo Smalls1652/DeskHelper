@@ -1,12 +1,10 @@
 <Window x:Class="DeskHelper.Wpf.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
-        xmlns:blazorpages="clr-namespace:DeskHelper.Blazor;assembly=DeskHelper.Blazor"
-        mc:Ignorable="d"
-        Title="DeskHelper" Height="720" Width="1280">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
+    xmlns:blazorpages="clr-namespace:DeskHelper.Blazor;assembly=DeskHelper.Blazor" mc:Ignorable="d" Title="DeskHelper" Height="720" Width="1280" MinWidth="425">
     <Grid>
         <blazor:BlazorWebView HostPage="wwwroot\index.html" Services="{StaticResource services}">
             <blazor:BlazorWebView.RootComponents>
