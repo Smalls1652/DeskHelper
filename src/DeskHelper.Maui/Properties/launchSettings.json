@@ -1,5 +1,8 @@
 {
   "profiles": {
+    "Default": {
+      "commandName": "Project"
+    },
     "Windows Machine": {
       "commandName": "MsixPackage",
       "alwaysReinstallApp": true,
