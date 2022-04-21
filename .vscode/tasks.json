@@ -1,40 +1,122 @@
 {
     "version": "2.0.0",
     "tasks": [
+        // Tasks for WPF
         {
-            "label": "build",
+            "label": "WPF - build",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/DeskHelper.Wpf/DeskHelper.Wpf.csproj",
+                "${workspaceFolder}/DeskHelper.Wpf.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "publish",
+            "label": "WPF - publish",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/DeskHelper.Wpf/DeskHelper.Wpf.csproj",
+                "${workspaceFolder}/DeskHelper.Wpf.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watch",
+            "label": "WPF - watch",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/src/DeskHelper.Wpf/DeskHelper.Wpf.csproj"
+                "${workspaceFolder}/DeskHelper.Wpf.sln"
             ],
+            "problemMatcher": "$msCompile"
+        },
+        // Tasks for MAUI
+        {
+            "label": "MAUI - build",
+            "command": "dotnet",
+            "type": "process",
+            "windows": {
+                "args": [
+                    "build",
+                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary",
+                    "--framework",
+                    "net6.0-windows10.0.19041"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "build",
+                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary",
+                    "--framework",
+                    "net6.0-maccatalyst"
+                ]
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "MAUI - publish",
+            "command": "dotnet",
+            "type": "process",
+            "windows": {
+                "args": [
+                    "publish",
+                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary",
+                    "--framework",
+                    "net6.0-windows10.0.19041"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "publish",
+                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary",
+                    "--framework",
+                    "net6.0-maccatalyst"
+                ]
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "MAUI - run",
+            "command": "dotnet",
+            "type": "process",
+            "windows": {
+                "args": [
+                    "run",
+                    "--project",
+                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary",
+                    "--framework",
+                    "net6.0-windows10.0.19041"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "run",
+                    "--project",
+                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary",
+                    "--framework",
+                    "net6.0-maccatalyst"
+                ]
+            },
             "problemMatcher": "$msCompile"
         }
     ]
