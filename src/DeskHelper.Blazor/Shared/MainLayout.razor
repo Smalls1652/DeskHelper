@@ -7,11 +7,20 @@
 		<div class="container-fluid pt-2">
 			<div class="row">
 				<div class="col">
-					<nav class="navbar navbar-dark bg-indigo rounded shadow">
-						<div class="navbar-brand ms-2 mt-auto">
-							<h1>
-								DeskHelper
-							</h1>
+					<nav class="navbar navbar-dark bg-indigo rounded shadow pb-0">
+						<div class="d-flex flex-row w-100 mx-3">
+							<div class="flex-grow-1 align-self-center">
+								<div class="navbar-brand">
+									<h1>
+										DeskHelper
+									</h1>
+								</div>
+							</div>
+							<div class="align-self-center">
+								<button class="btn btn-primary" role="button" @onclick="HandleRefresh">
+									<i class="bi bi-arrow-clockwise" />
+								</button>
+							</div>
 						</div>
 					</nav>
 				</div>
