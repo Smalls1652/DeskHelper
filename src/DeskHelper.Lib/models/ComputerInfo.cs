@@ -74,7 +74,7 @@ public class ComputerInfo
         DomainRole domainRole = (DomainRole)computerSystemProps["DomainRole"];
 
         bool isDomainJoined;
-        if (domainRole == DomainRole.MemberWorkstation)
+        if (domainRole == DomainRole.MemberWorkstation || domainRole == DomainRole.MemberServer)
         {
             isDomainJoined = true;
         }
