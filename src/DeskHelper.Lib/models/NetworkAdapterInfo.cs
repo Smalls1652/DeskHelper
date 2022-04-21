@@ -1,4 +1,4 @@
-#if _WINDOWS
+﻿#if _WINDOWS
 using System.Management;
 #endif
 
@@ -62,6 +62,11 @@ public class NetworkAdapterInfo
     public List<IPAddress>? InterfaceDNSServers { get; set; }
 
     public OperationalStatus InterfaceStatus { get; set; }
+
+    public bool InterfaceHasIPv4Address
+    {
+        get => InterfaceIPv4Address is not null;
+    }
 
     private static List<Dictionary<string, IPAddress>> GetIPv4AddressesFromProperties(IPInterfaceProperties interfaceProperties)
     {
