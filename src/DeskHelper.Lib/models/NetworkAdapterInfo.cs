@@ -1,4 +1,7 @@
+#if _WINDOWS
 using System.Management;
+#endif
+
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -14,7 +17,10 @@ public class NetworkAdapterInfo
         InterfaceId = networkInterface.Id;
         InterfaceName = networkInterface.Name;
         InterfaceMACAddress = ConvertPhysicalAddressToString(networkInterface.GetPhysicalAddress());
+
+        #if _WINDOWS
         InterfaceIsPhysical = GetIsInterfacePhysical(InterfaceMACAddress);
+        #endif
 
         IPInterfaceProperties interfaceProperties = networkInterface.GetIPProperties();
         
@@ -129,6 +135,7 @@ public class NetworkAdapterInfo
         return string.Join(":", interfaceMACAddressOctets);
     }
 
+    #if _WINDOWS
     private static bool GetIsInterfacePhysical(string macAddress)
     {
         List<ManagementObject> netAdapters = new();
@@ -157,4 +164,5 @@ public class NetworkAdapterInfo
 
         return isPhysical;
     }
+    #endif
 }
