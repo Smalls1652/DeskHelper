@@ -97,11 +97,11 @@
             "type": "process",
             "windows": {
                 "args": [
+                    "watch",
                     "run",
                     "--project",
                     "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
                     "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary",
                     "--framework",
                     "net6.0-windows10.0.19041"
                 ]
@@ -112,7 +112,6 @@
                     "--project",
                     "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
                     "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary",
                     "--framework",
                     "net6.0-maccatalyst"
                 ]
