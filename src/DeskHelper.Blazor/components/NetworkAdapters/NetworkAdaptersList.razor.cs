@@ -1,4 +1,4 @@
-using System.Net.NetworkInformation;
+﻿using System.Net.NetworkInformation;
 using DeskHelper.Lib.Models;
 using Microsoft.AspNetCore.Components;
 
@@ -20,11 +20,11 @@ public partial class NetworkAdaptersList : ComponentBase
         {
 #if _WINDOWS
             _networkAdapters = InputNetworkAdapters.FindAll(
-                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceStatus is OperationalStatus.Up && adapterInfo.InterfaceIsPhysical is true
+                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceHasIPv4Address is true && adapterInfo.InterfaceIsPhysical is true
             );
 #else
             _networkAdapters = InputNetworkAdapters.FindAll(
-                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceStatus is OperationalStatus.Up
+                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceHasIPv4Address is true
             );
 #endif
         }
