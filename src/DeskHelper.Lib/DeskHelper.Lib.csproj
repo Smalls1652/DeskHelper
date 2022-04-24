@@ -6,8 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<PropertyGroup>
+		<PlatformIsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</PlatformIsWindows>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(PlatformIsWindows)' == 'true'">
+		<DefineConstants>_WINDOWS</DefineConstants>
+	</PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="System.Management" Version="6.0.0" Condition="$(TargetFramework) == 'net6.0-windows'" />
+    <PackageReference Include="System.Management" Version="6.0.0" Condition="'$(PlatformIsWindows)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup>

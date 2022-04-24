@@ -5,6 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+	<PropertyGroup>
+		<PlatformIsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</PlatformIsWindows>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(PlatformIsWindows)' == 'true'">
+		<DefineConstants>_WINDOWS</DefineConstants>
+	</PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\DeskHelper.Lib\DeskHelper.Lib.csproj">
             <PrivateAssets>all</PrivateAssets>
