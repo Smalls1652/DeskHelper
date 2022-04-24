@@ -8,9 +8,12 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
         builder
-            .RegisterBlazorMauiWebView()
             .UseMauiApp<App>();
-        builder.Services.AddBlazorWebView();
+
+        builder.Services.AddMauiBlazorWebView();
+#if DEBUG
+		builder.Services.AddBlazorWebViewDeveloperTools();
+#endif
 
 		return builder.Build();
 	}
