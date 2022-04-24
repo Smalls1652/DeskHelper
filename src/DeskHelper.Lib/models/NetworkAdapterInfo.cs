@@ -18,12 +18,11 @@ public class NetworkAdapterInfo
         InterfaceName = networkInterface.Name;
         InterfaceMACAddress = ConvertPhysicalAddressToString(networkInterface.GetPhysicalAddress());
 
-        #if _WINDOWS
+
         InterfaceIsPhysical = GetIsInterfacePhysical(InterfaceMACAddress);
-        #endif
 
         IPInterfaceProperties interfaceProperties = networkInterface.GetIPProperties();
-        
+
         List<Dictionary<string, IPAddress>> ipAddressInfo = GetIPv4AddressesFromProperties(interfaceProperties);
         if (ipAddressInfo.Count is not 0)
         {
@@ -98,7 +97,7 @@ public class NetworkAdapterInfo
     private static List<IPAddress> GetDNSServersFromProperties(IPInterfaceProperties interfaceProperties)
     {
         List<IPAddress> dnsServers = new();
-        
+
         foreach (IPAddress ipAddressItem in interfaceProperties.DnsAddresses)
         {
             if (ipAddressItem.AddressFamily is AddressFamily.InterNetwork)
@@ -140,34 +139,41 @@ public class NetworkAdapterInfo
         return string.Join(":", interfaceMACAddressOctets);
     }
 
-    #if _WINDOWS
     private static bool GetIsInterfacePhysical(string macAddress)
     {
-        List<ManagementObject> netAdapters = new();
-        using (ManagementObjectSearcher objSearcher = new($"SELECT MACAddress,PhysicalAdapter FROM Win32_NetworkAdapter"))
+        if (OperatingSystem.IsWindows())
         {
-            foreach (ManagementObject managementObject in objSearcher.Get())
+            List<ManagementObject> netAdapters = new();
+            using (ManagementObjectSearcher objSearcher = new($"SELECT MACAddress,PhysicalAdapter FROM Win32_NetworkAdapter"))
             {
-                netAdapters.Add(managementObject);
+                foreach (ManagementObject managementObject in objSearcher.Get())
+                {
+                    netAdapters.Add(managementObject);
+                }
             }
+
+            bool isPhysical;
+
+            try
+            {
+#pragma warning disable CA1416 // Validate platform compatibility
+                ManagementObject netAdapterProps = netAdapters.Find(
+                    (ManagementObject item) => (string)item["MACAddress"] == macAddress
+                )!;
+#pragma warning restore CA1416 // Validate platform compatibility
+
+                isPhysical = (bool)netAdapterProps["PhysicalAdapter"];
+            }
+            catch
+            {
+                isPhysical = false;
+            }
+
+            return isPhysical;
         }
-
-        bool isPhysical;
-
-        try
+        else
         {
-            ManagementObject netAdapterProps = netAdapters.Find(
-                (ManagementObject item) => (string)item["MACAddress"] == macAddress
-            )!;
-
-            isPhysical = (bool)netAdapterProps["PhysicalAdapter"];
+            return false;
         }
-        catch
-        {
-            isPhysical = false;
-        }
-
-        return isPhysical;
     }
-    #endif
 }
