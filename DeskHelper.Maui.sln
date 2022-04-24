@@ -6,12 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FC2921CC-B71D-4A90-BAC8-23178F21BE8F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeskHelper.Maui", "src\DeskHelper.Maui\DeskHelper.Maui.csproj", "{FF213965-61EF-4F60-84BC-4EA53BC61D36}"
+	ProjectSection(ProjectDependencies) = postProject
+		{269E0C53-0CFA-46D2-A451-AA640530A8AD} = {269E0C53-0CFA-46D2-A451-AA640530A8AD}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeskHelper.Lib", "src\DeskHelper.Lib\DeskHelper.Lib.csproj", "{82EEE339-436A-4B35-9591-232BF2AB5BE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeskHelper.Blazor", "src\DeskHelper.Blazor\DeskHelper.Blazor.csproj", "{1B71D87D-5493-4072-B670-A59177BB4254}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallsOnline.Subnetting.Lib", "src\SmallsOnline.Subnetting\src\SmallsOnline.Subnetting.Lib\SmallsOnline.Subnetting.Lib.csproj", "{269E0C53-0CFA-46D2-A451-AA640530A8AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmallsOnline.Subnetting.Lib", "src\SmallsOnline.Subnetting\src\SmallsOnline.Subnetting.Lib\SmallsOnline.Subnetting.Lib.csproj", "{269E0C53-0CFA-46D2-A451-AA640530A8AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
