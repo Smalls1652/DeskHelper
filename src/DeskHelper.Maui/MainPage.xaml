@@ -6,9 +6,6 @@
              xmlns:blazorpages="clr-namespace:DeskHelper.Blazor;assembly=DeskHelper.Blazor"
              x:Class="DeskHelper.Maui.MainPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}"
-             WidthRequest="1280"
-             HeightRequest="820"
-             MinimumWidthRequest="425"
              Title="DeskHelper">
 
     <b:BlazorWebView HostPage="wwwroot/index.html">
