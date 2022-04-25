@@ -1,4 +1,4 @@
-#if _WINDOWS
+#if IsWindows
 using System.Management;
 #endif
 
@@ -14,7 +14,7 @@ public class ComputerInfo
         _hostName = GetComputerHostName();
         _dnsName = GetComputerDNSName();
 
-#if _WINDOWS
+#if IsWindows
         _computerDomainName = GetComputerDomainName();
         _computerIsDomainJoined = GetIsComputerDomainJoined();
 #else
@@ -45,6 +45,11 @@ public class ComputerInfo
         get => _computerIsDomainJoined;
     }
 
+    public OperatingSystemInfo OSInfo
+    {
+        get => _osInfo;
+    }
+
     public List<NetworkAdapterInfo> NetworkAdapters
     {
         get => _networkAdapters;
@@ -54,6 +59,7 @@ public class ComputerInfo
     private readonly string _dnsName = null!;
     private readonly string? _computerDomainName;
     private readonly bool _computerIsDomainJoined;
+    private readonly OperatingSystemInfo _osInfo = new();
     private readonly List<NetworkAdapterInfo> _networkAdapters = null!;
 
     private static string GetComputerHostName()
@@ -66,7 +72,7 @@ public class ComputerInfo
         return Dns.GetHostName();
     }
 
-#if _WINDOWS
+#if IsWindows
     private static string GetComputerDomainName()
     {
         using ManagementObject computerSystemProps = new(
