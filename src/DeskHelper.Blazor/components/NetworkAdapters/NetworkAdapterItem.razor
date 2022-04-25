@@ -1,11 +1,10 @@
-@namespace DeskHelper.Blazor.Components.NetworkAdapters
+﻿@namespace DeskHelper.Blazor.Components.NetworkAdapters
 @using System.Net.NetworkInformation
 
 @inherits ComponentBase
 
 <div class="card shadow-sm">
-    <div
-        class="card-header text-white @(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "bg-success" : "bg-danger")">
+    <div class="card-header text-white @(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "bg-success" : "bg-danger")">
         <h3 class="card-title">
             @AdapterItem.InterfaceName
         </h3>
@@ -62,7 +61,7 @@
                         <div class="mb-1">
                             <ul class="list-group list-group-numbered">
                                 @if (AdapterItem.InterfaceDNSServers is not null &&
-                                AdapterItem.InterfaceDNSServers.Count is not 0)
+                               AdapterItem.InterfaceDNSServers.Count is not 0)
                                 {
                                     @foreach (IPAddress dnsServer in AdapterItem.InterfaceDNSServers)
                                     {
@@ -84,12 +83,14 @@
                             </ul>
                         </div>
                     </div>
-                     <div class="list-group-item">
+                    <div class="list-group-item">
                         <h5 class="mb-2">
                             MAC Address
                         </h5>
                         <div class="mb-1">
-                            @AdapterItem.InterfaceMACAddress
+                            <MonospaceText>
+                                @AdapterItem.InterfaceMACAddress
+                            </MonospaceText>
                         </div>
                     </div>
                 </div>
