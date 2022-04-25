@@ -9,30 +9,52 @@
         </h2>
     </div>
     <div class="card-body">
-        <div class="list-group">
-            <div class="list-group-item shadow-sm">
-                <h5 class="mb-2">
-                    Computer name
-                </h5>
-                <MonospaceText>
-                    @InputComputerInfo.HostName
-                </MonospaceText>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="list-group">
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Computer name
+                        </h5>
+                        <MonospaceText>
+                            @InputComputerInfo.HostName
+                        </MonospaceText>
+                    </div>
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Domain name
+                        </h5>
+                        <MonospaceText>
+                            @InputComputerInfo.ComputerDomainName
+                        </MonospaceText>
+                    </div>
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Domain joined
+                        </h5>
+                        <MonospaceText>
+                            @InputComputerInfo.ComputerIsDomainJoined
+                        </MonospaceText>
+                    </div>
+                </div>
             </div>
-            <div class="list-group-item shadow-sm">
-                <h5 class="mb-2">
-                    Domain name
-                </h5>
-                <MonospaceText>
-                    @InputComputerInfo.ComputerDomainName
-                </MonospaceText>
-            </div>
-            <div class="list-group-item shadow-sm">
-                <h5 class="mb-2">
-                    Domain joined
-                </h5>
-                <MonospaceText>
-                    @InputComputerInfo.ComputerIsDomainJoined
-                </MonospaceText>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="list-group">
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Operating System
+                        </h5>
+                        @InputComputerInfo.OSInfo.OSName
+                    </div>
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Version
+                        </h5>
+                        <MonospaceText>
+                            @InputComputerInfo.OSInfo.OSVersion
+                        </MonospaceText>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
