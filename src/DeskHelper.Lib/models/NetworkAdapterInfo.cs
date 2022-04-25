@@ -1,4 +1,4 @@
-﻿#if _WINDOWS
+﻿#if IsWindows
 using System.Management;
 #endif
 
@@ -141,8 +141,7 @@ public class NetworkAdapterInfo
 
     private static bool GetIsInterfacePhysical(string macAddress)
     {
-        if (OperatingSystem.IsWindows())
-        {
+#if IsWindows
             List<ManagementObject> netAdapters = new();
             using (ManagementObjectSearcher objSearcher = new($"SELECT MACAddress,PhysicalAdapter FROM Win32_NetworkAdapter"))
             {
@@ -170,10 +169,8 @@ public class NetworkAdapterInfo
             }
 
             return isPhysical;
-        }
-        else
-        {
-            return false;
-        }
+#else
+        return false;
+#endif
     }
 }
