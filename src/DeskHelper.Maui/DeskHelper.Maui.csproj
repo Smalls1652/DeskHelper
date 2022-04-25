@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-maccatalyst;net6.0-windows10.0.19041</TargetFrameworks>
+		<TargetFrameworks>net6.0-maccatalyst</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<Nullable>enable</Nullable>
 		<UseMaui>true</UseMaui>
@@ -10,7 +10,20 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<EnableDefaultCssItems>false</EnableDefaultCssItems>
 		<RootNamespace>DeskHelper.Maui</RootNamespace>
+	</PropertyGroup>
 
+	<PropertyGroup>
+		<PlatformIsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">
+			true
+		</PlatformIsWindows>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(PlatformIsWindows)'=='true'">
+		<TargetFrameworks>$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
+		<DefineConstants>IsWindows</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<!-- Display name -->
 		<ApplicationTitle>DeskHelper</ApplicationTitle>
 
@@ -36,20 +49,16 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	  <MtouchLink>SdkOnly</MtouchLink>
+		<MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	  <MtouchLink>SdkOnly</MtouchLink>
+		<MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<PlatformIsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</PlatformIsWindows>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(PlatformIsWindows)'=='true'">
-		<DefineConstants>_WINDOWS</DefineConstants>
-	</PropertyGroup>
-	
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
@@ -74,8 +83,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\DeskHelper.Lib\DeskHelper.Lib.csproj" />
-	  <ProjectReference Include="..\DeskHelper.Blazor\DeskHelper.Blazor.csproj" />
+		<ProjectReference Include="..\DeskHelper.Lib\DeskHelper.Lib.csproj" />
+		<ProjectReference Include="..\DeskHelper.Blazor\DeskHelper.Blazor.csproj" />
 	</ItemGroup>
 
 </Project>
