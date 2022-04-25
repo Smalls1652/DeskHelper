@@ -11,7 +11,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(PlatformIsWindows)' == 'true'">
-		<DefineConstants>_WINDOWS</DefineConstants>
+		<DefineConstants>IsWindows</DefineConstants>
 	</PropertyGroup>
 
   <ItemGroup>
