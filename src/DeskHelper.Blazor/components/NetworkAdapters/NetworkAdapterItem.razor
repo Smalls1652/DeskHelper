@@ -4,11 +4,9 @@
 @inherits ComponentBase
 
 <div class="card shadow-sm">
-    <div class="card-header text-white @(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "bg-success" : "bg-danger")">
-        <h3 class="card-title">
-            @AdapterItem.InterfaceName
-        </h3>
-    </div>
+    <h3 class="card-header text-white @(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "bg-success" : "bg-danger")">
+        @AdapterItem.InterfaceName
+    </h3>
     <div class="card-body">
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">
@@ -59,9 +57,9 @@
                             DNS Servers
                         </h5>
                         <div class="mb-1">
-                            <ul class="list-group list-group-numbered">
+                            <ul class="list-group">
                                 @if (AdapterItem.InterfaceDNSServers is not null &&
-                               AdapterItem.InterfaceDNSServers.Count is not 0)
+                                AdapterItem.InterfaceDNSServers.Count is not 0)
                                 {
                                     @foreach (IPAddress dnsServer in AdapterItem.InterfaceDNSServers)
                                     {
@@ -95,7 +93,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="col-sm-12 col-md-6 col-lg-6 pt-2 pt-md-0">
                 <h4>
                     Subnet Info
                 </h4>
