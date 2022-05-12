@@ -1,0 +1,61 @@
+﻿@namespace DeskHelper.Blazor.Components.AzureAdInfo
+
+@inherits ComponentBase
+
+<div class="card shadow">
+    <h2 class="card-header">
+        Azure AD details
+    </h2>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="list-group">
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Device ID
+                        </h5>
+                        <MonospaceText>
+                            @InputAzureAdInfo.DeviceId
+                        </MonospaceText>
+                    </div>
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Tenant ID
+                        </h5>
+                        <MonospaceText>
+                            @InputAzureAdInfo.TenantId
+                        </MonospaceText>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 pt-2 pt-md-0">
+                <div class="list-group">
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Azure AD joined
+                        </h5>
+                        <MonospaceText>
+                            @InputAzureAdInfo.AzureAdJoined
+                        </MonospaceText>
+                    </div>
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Enterpise joined
+                        </h5>
+                        <MonospaceText>
+                            @InputAzureAdInfo.EnterpriseJoined
+                        </MonospaceText>
+                    </div>
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Domain joined
+                        </h5>
+                        <MonospaceText>
+                            @InputAzureAdInfo.DomainJoined
+                        </MonospaceText>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
