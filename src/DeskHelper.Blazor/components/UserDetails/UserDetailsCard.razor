@@ -1,0 +1,25 @@
+@namespace DeskHelper.Blazor.Components.UserDetails
+
+@inherits ComponentBase
+
+<div class="card shadow h-100">
+    <h2 class="card-header">
+        User details
+    </h2>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="list-group">
+                    <div class="list-group-item shadow-sm">
+                        <h5 class="mb-2">
+                            Current logged on user
+                        </h5>
+                        <MonospaceText>
+                            @UserName
+                        </MonospaceText>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
