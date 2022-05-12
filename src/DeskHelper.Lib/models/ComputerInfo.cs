@@ -17,6 +17,7 @@ public class ComputerInfo
 #if IsWindows
         _computerDomainName = GetComputerDomainName();
         _computerIsDomainJoined = GetIsComputerDomainJoined();
+        _azureAdInfo = new();
 #else
         _computerDomainName = "Not supported";
         _computerIsDomainJoined = false;
@@ -45,6 +46,16 @@ public class ComputerInfo
         get => _computerIsDomainJoined;
     }
 
+    public string CurrentUser
+    {
+        get => Environment.UserName;
+    }
+
+    public AadStatus? AzureAdInfo
+    {
+        get => _azureAdInfo;
+    }
+
     public OperatingSystemInfo OSInfo
     {
         get => _osInfo;
@@ -59,6 +70,7 @@ public class ComputerInfo
     private readonly string _dnsName = null!;
     private readonly string? _computerDomainName;
     private readonly bool _computerIsDomainJoined;
+    private AadStatus? _azureAdInfo;
     private readonly OperatingSystemInfo _osInfo = new();
     private readonly List<NetworkAdapterInfo> _networkAdapters = null!;
 
@@ -73,6 +85,7 @@ public class ComputerInfo
     }
 
 #if IsWindows
+#pragma warning disable CA1416 // Validate platform compatibility
     private static string GetComputerDomainName()
     {
         using ManagementObject computerSystemProps = new(
@@ -102,6 +115,7 @@ public class ComputerInfo
 
         return isDomainJoined;
     }
+#pragma warning restore CA1416 // Validate platform compatibility
 #endif
 
     private static List<NetworkAdapterInfo> GetNetworkAdapters()
