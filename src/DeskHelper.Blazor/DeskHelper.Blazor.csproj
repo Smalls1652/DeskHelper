@@ -6,11 +6,11 @@
     </PropertyGroup>
 
 	<PropertyGroup>
-		<PlatformIsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</PlatformIsWindows>
+		<PlatformIsWindows Condition="$([MSBuild]::IsOSPlatform('windows'))">true</PlatformIsWindows>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(PlatformIsWindows)' == 'true'">
-		<DefineConstants>_WINDOWS</DefineConstants>
+		<DefineConstants>IsWindows</DefineConstants>
 	</PropertyGroup>
 
     <ItemGroup>
@@ -26,5 +26,12 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.4">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\appicon.png">
+        <PackagePath>\</PackagePath>
+        <Pack>True</Pack>
+      </None>
     </ItemGroup>
 </Project>
