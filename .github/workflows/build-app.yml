@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+name: Build app
+on:
+  workflow_call:
+     inputs:
+       os:
+         required: true
+         type: string
+
+jobs:
+  build-app:
+   name: Build app on ${{ inputs.os }}
+   runs-on: ${{ inputs.os }}
+   env:
+      DOTNET_NOLOGO: true
+
+   steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: "6.0.x"
+        include-prerelease: true
+
+    - name: Install MAUI workload
+      run: dotnet workload install maui --from-rollback-file https://aka.ms/dotnet/maui/rc.3.json --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+
+    - name: Build app
+      shell: pwsh
+      run: .\buildMaui.ps1

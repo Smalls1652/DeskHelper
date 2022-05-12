@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+name: Build
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  build-windows:
+   name: Build Windows app
+   uses: ./.github/workflows/build-app.yml
+   with:
+    os: windows-latest
+  
+  build-macos:
+   name: Build macOS app
+   uses: ./.github/workflows/build-app.yml
+   with:
+    os: macos-latest
