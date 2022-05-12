@@ -6,12 +6,9 @@ using Microsoft.Extensions.Logging;
 namespace DeskHelper.Blazor.Components.NetworkAdapters;
 
 public partial class NetworkAdaptersList : ComponentBase
-{
+{   
     [CascadingParameter(Name = "inputAdapters")]
     protected List<NetworkAdapterInfo> InputNetworkAdapters { get; set; } = null!;
-
-    [Inject]
-    protected ILogger<NetworkAdaptersList> ComponentLogger { get; set; } = null!;
 
     [Parameter()]
     public bool OnlyUpNetworkAdapters { get; set; }
@@ -22,31 +19,25 @@ public partial class NetworkAdaptersList : ComponentBase
     {
         if (OnlyUpNetworkAdapters is true)
         {
-            if (OperatingSystem.IsWindows())
-            {
-                _networkAdapters = InputNetworkAdapters.FindAll(
-                    (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceHasIPv4Address is true && adapterInfo.InterfaceIsPhysical is true
-                );
-            }
-            else
-            {
-                _networkAdapters = InputNetworkAdapters.FindAll(
-                    (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceHasIPv4Address is true
-                );
-            }
+#if IsWindows
+            _networkAdapters = InputNetworkAdapters.FindAll(
+                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceStatus is OperationalStatus.Up && adapterInfo.InterfaceIsPhysical is true
+            );
+#else
+            _networkAdapters = InputNetworkAdapters.FindAll(
+                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceHasIPv4Address is true
+            );
+#endif
         }
         else
         {
-            if (OperatingSystem.IsWindows())
-            {
-                _networkAdapters = InputNetworkAdapters.FindAll(
-                (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceIsPhysical is true
-            );
-            }
-            else
-            {
-                _networkAdapters = InputNetworkAdapters;
-            }
+#if IsWindows
+            _networkAdapters = InputNetworkAdapters.FindAll(
+            (NetworkAdapterInfo adapterInfo) => adapterInfo.InterfaceIsPhysical is true
+        );
+#else
+            _networkAdapters = InputNetworkAdapters;
+#endif
         }
     }
 }
