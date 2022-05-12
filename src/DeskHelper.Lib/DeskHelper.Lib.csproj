@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<PlatformIsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</PlatformIsWindows>
+		<PlatformIsWindows Condition="$([MSBuild]::IsOSPlatform('windows'))">true</PlatformIsWindows>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(PlatformIsWindows)' == 'true'">
@@ -19,6 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SmallsOnline.Subnetting\src\SmallsOnline.Subnetting.Lib\SmallsOnline.Subnetting.Lib.csproj" />
+    <ProjectReference Include="..\SmallsOnline.Subnetting\src\SmallsOnline.Subnetting.Lib\SmallsOnline.Subnetting.Lib.csproj" TargetFramework="net6.0" />
   </ItemGroup>
 </Project>
