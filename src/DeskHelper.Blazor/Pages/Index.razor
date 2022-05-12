@@ -1,7 +1,7 @@
 ﻿@namespace DeskHelper.Blazor
 
 @page "/"
-<div class="container-fluid">
+<div class="container-fluid-md container-lg">
     @if (_computerInfo is null)
     {
         <div class="row pt-2">
@@ -13,11 +13,11 @@
     else
     {
         <div class="row pt-2">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-lg-7">
                 <ComputerDetailsCard InputComputerInfo="@_computerInfo" />
             </div>
 
-            <div class="col-xs-12 col-md-6 pt-xs-2 pt-2 pt-md-0">
+            <div class="col-xs-12 col-lg-5 pt-xs-2 pt-2 pt-lg-0">
                 <UserDetailsCard UserName="@_computerInfo.CurrentUser" />
             </div>
         </div>
