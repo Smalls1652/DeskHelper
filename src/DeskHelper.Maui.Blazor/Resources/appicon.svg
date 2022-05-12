@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg13"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04, custom)"
+   sodipodi:docname="appicon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview15"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="1.466344"
+     inkscape:cx="80.813233"
+     inkscape:cy="240.05281"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs10">
+    <rect
+       x="27.278729"
+       y="74.334536"
+       width="452.8269"
+       height="366.21693"
+       id="rect5443" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter9269"
+       x="-0.08585806"
+       y="-0.10674083"
+       width="1.1761879"
+       height="1.2190411">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood9259" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite9261" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="8"
+         result="blur"
+         id="feGaussianBlur9263" />
+      <feOffset
+         dx="1"
+         dy="1"
+         result="offset"
+         id="feOffset9265" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite9267" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#0088aa;stroke-width:0.263451"
+       id="rect341"
+       width="135.46666"
+       height="135.46666"
+       x="-2.3032614e-08"
+       y="0" />
+    <path
+       style="fill:#22425e;stroke-width:0.681968;fill-opacity:1"
+       d="M 0.34098411,255.73808 V 0 H 256.07907 511.81715 V 255.73808 511.47616 H 256.07907 0.34098411 Z"
+       id="path521"
+       transform="scale(0.26458333)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.53972783,0,0,0.45818687,-8.5754295,-14.903418)"
+       id="text5441"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:Calibri;white-space:pre;shape-inside:url(#rect5443);fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter9269)"><tspan
+         x="27.279297"
+         y="149.00062"
+         id="tspan1841">Desk
+</tspan><tspan
+         x="27.279297"
+         y="255.66725"
+         id="tspan1843">Helper</tspan></text>
+  </g>
+</svg>
