@@ -142,33 +142,40 @@ public class NetworkAdapterInfo
     private static bool GetIsInterfacePhysical(string macAddress)
     {
 #if IsWindows
-            List<ManagementObject> netAdapters = new();
-            using (ManagementObjectSearcher objSearcher = new($"SELECT MACAddress,PhysicalAdapter FROM Win32_NetworkAdapter"))
-            {
-                foreach (ManagementObject managementObject in objSearcher.Get())
-                {
-                    netAdapters.Add(managementObject);
-                }
-            }
-
-            bool isPhysical;
-
-            try
-            {
 #pragma warning disable CA1416 // Validate platform compatibility
-                ManagementObject netAdapterProps = netAdapters.Find(
-                    (ManagementObject item) => (string)item["MACAddress"] == macAddress
-                )!;
-#pragma warning restore CA1416 // Validate platform compatibility
+        List<ManagementObject> netAdapters = new();
+        using (ManagementObjectSearcher objSearcher = new($"SELECT MACAddress,PhysicalAdapter FROM Win32_NetworkAdapter"))
+        {
+            foreach (ManagementObject managementObject in objSearcher.Get())
+            {
+                netAdapters.Add(managementObject);
+            }
+        }
 
+        bool isPhysical;
+
+            ManagementObject netAdapterProps = netAdapters.Find(
+                (ManagementObject item) => (string)item["MACAddress"] == macAddress
+            )!;
+
+        try
+        {
+            if (netAdapterProps is not null)
+            {
                 isPhysical = (bool)netAdapterProps["PhysicalAdapter"];
             }
-            catch
+            else
             {
                 isPhysical = false;
             }
+        }
+        catch (NullReferenceException e)
+        {
+            isPhysical = false;
+        }
+#pragma warning restore CA1416 // Validate platform compatibility
 
-            return isPhysical;
+        return isPhysical;
 #else
         return false;
 #endif
