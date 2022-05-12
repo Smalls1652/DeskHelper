@@ -51,7 +51,9 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\appiconfg.svg" Color="#22425e" />
+		<MauiIcon Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" Include="Resources\appiconfg.svg" Color="#22425e" />
+
+		<MauiIcon Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'" Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" ForegroundScale="0.75" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\appiconfg.svg" BaseSize="128,128" />
@@ -64,7 +66,7 @@
 		<Content Remove="Properties\launchSettings.json" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
 	  <Content Include="Resources\Images\appicon.ico" />
 	</ItemGroup>
 
