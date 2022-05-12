@@ -7,7 +7,7 @@ $writeInfoSplat = @{
     "InformationAction" = "Continue";
 }
 
-foreach ($srcPathItem in @("src\DeskHelper.Wpf", "src\DeskHelper.Maui")) {
+foreach ($srcPathItem in @("src\DeskHelper.Wpf", "src\DeskHelper.Maui.Blazor")) {
     $bootstrapCssPath = Join-Path -Path $scriptRoot -ChildPath "node_modules\bootstrap\dist\css\bootstrap.min.css"
     $bootstrapCssMapPath = Join-Path -Path $scriptRoot -ChildPath "node_modules\bootstrap\dist\css\bootstrap.min.css.map"
     $bootstrapOutPath = Join-Path -Path $scriptRoot -ChildPath "$($srcPathItem)\wwwroot\css\bootstrap\"
