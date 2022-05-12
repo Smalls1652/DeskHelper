@@ -13,10 +13,23 @@
     else
     {
         <div class="row pt-2">
-            <div class="col">
+            <div class="col-xs-12 col-md-6">
                 <ComputerDetailsCard InputComputerInfo="@_computerInfo" />
             </div>
+
+            <div class="col-xs-12 col-md-6 pt-xs-2 pt-2 pt-md-0">
+                <UserDetailsCard UserName="@_computerInfo.CurrentUser" />
+            </div>
         </div>
+
+        @if (_computerInfo.AzureAdInfo is not null)
+        {
+            <div class="row pt-2">
+                <div class="col">
+                    <AzureAdInfoCard InputAzureAdInfo="@_computerInfo.AzureAdInfo" />
+                </div>
+            </div>
+        }
 
         <div class="row pt-2 pb-3">
             <div class="col">
