@@ -169,7 +169,7 @@ public class NetworkAdapterInfo
                 isPhysical = false;
             }
         }
-        catch (NullReferenceException e)
+        catch (NullReferenceException)
         {
             isPhysical = false;
         }
