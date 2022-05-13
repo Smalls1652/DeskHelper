@@ -7,6 +7,13 @@ $writeInfoSplat = @{
     "InformationAction" = "Continue";
 }
 
+$nodeModulesPath = Join-Path -Path $scriptRoot -ChildPath "node_modules\"
+if (Test-Path -Path $nodeModulesPath) {
+    Remove-Item -Path $nodeModulesPath -Recurse -Force
+}
+
+Start-Process -FilePath "npm" -ArgumentList @("install") -Wait -NoNewWindow -WorkingDirectory $scriptRoot
+
 foreach ($srcPathItem in @("src\DeskHelper.Wpf", "src\DeskHelper.Maui.Blazor")) {
     $bootstrapCssPath = Join-Path -Path $scriptRoot -ChildPath "node_modules\bootstrap\dist\css\bootstrap.min.css"
     $bootstrapCssMapPath = Join-Path -Path $scriptRoot -ChildPath "node_modules\bootstrap\dist\css\bootstrap.min.css.map"
