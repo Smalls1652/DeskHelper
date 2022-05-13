@@ -13,6 +13,12 @@ public partial class CopyItemButton : ComponentBase
     [EditorRequired]
     public string TextToCopy { get; set; } = null!;
 
+    [Parameter]
+    public string ButtonPrimaryColorClass { get; set; } = "btn-dark";
+
+    [Parameter]
+    public string ButtonOnCopyColorClass { get; set; } = "btn-success";
+
     private bool _copyInProgress = false;
 
     private IJSObjectReference? _copyItemButtonJsModule;

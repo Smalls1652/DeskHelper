@@ -2,6 +2,6 @@
 
 @inherits ComponentBase
 
-<button type="button" class="btn @(!_copyInProgress ? "btn-dark" : "btn-success")" title="Copy to clipboard" @onclick="CopyTextToClipboard">
+<button type="button" class="btn @(!_copyInProgress ? ButtonPrimaryColorClass : ButtonOnCopyColorClass)" title="Copy to clipboard" @onclick="CopyTextToClipboard">
     <i class="bi @(!_copyInProgress ? "bi-clipboard2" : "bi-clipboard2-check")" />
 </button>
