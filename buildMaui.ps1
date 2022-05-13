@@ -16,8 +16,12 @@ switch ([System.OperatingSystem]::IsMacOS()) {
 }
 Write-Verbose "Target platform: $($_platform)"
 
+$bootstrapInstallScript = Join-Path -Path $PSScriptRoot -ChildPath "copyBootstrapFiles.ps1"
+
 $slnFile = Join-Path -Path $PSScriptRoot -ChildPath "DeskHelper.Maui.Blazor.sln"
 $srcPath = Join-Path -Path $PSScriptRoot -ChildPath "src\DeskHelper.Maui.Blazor\"
+
+& $bootstrapInstallScript
 
 dotnet restore "$($slnFile)" --force --nologo
 dotnet clean "$($slnFile)" --configuration "Release" -noLogo
