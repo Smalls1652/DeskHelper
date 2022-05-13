@@ -4,7 +4,7 @@
 <div class="container-fluid-md container-lg">
     @if (_computerInfo is null)
     {
-        <div class="row pt-2">
+        <div class="row pt-2 fade-slide-in">
             <div class="col">
                 <LoadingCard />
             </div>
@@ -12,7 +12,7 @@
     }
     else
     {
-        <div class="row pt-2">
+        <div class="row pt-2 fade-slide-in">
             <div class="col-xs-12 col-lg-7">
                 <ComputerDetailsCard InputComputerInfo="@_computerInfo" />
             </div>
@@ -24,14 +24,14 @@
 
         @if (_computerInfo.AzureAdInfo is not null)
         {
-            <div class="row pt-2">
+            <div class="row pt-2 fade-slide-in">
                 <div class="col">
                     <AzureAdInfoCard InputAzureAdInfo="@_computerInfo.AzureAdInfo" />
                 </div>
             </div>
         }
 
-        <div class="row pt-2 pb-3">
+        <div class="row pt-2 pb-3 fade-slide-in">
             <div class="col">
                 <NetworkAdaptersCard InputNetworkAdapters="@_computerInfo.NetworkAdapters" />
             </div>
