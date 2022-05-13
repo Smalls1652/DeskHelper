@@ -4,9 +4,18 @@
 @inherits ComponentBase
 
 <div class="card shadow-sm fade-slide-in">
-    <h3 class="card-header text-white @(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "bg-success" : "bg-danger")">
-        @AdapterItem.InterfaceName
-    </h3>
+    <div class="card-header @(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "bg-success" : "bg-danger")">
+        <div class="d-flex flex-row w-100">
+            <div class="flex-grow-1 align-self-center">
+                <h3 class="text-white mb-0">
+                    @AdapterItem.InterfaceName
+                </h3>
+            </div>
+            <div class="align-self-center">
+                <CopyItemButton TextToCopy="@GetCopyText()" />
+            </div>
+        </div>
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">
