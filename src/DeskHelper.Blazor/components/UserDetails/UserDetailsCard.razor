@@ -3,9 +3,18 @@
 @inherits ComponentBase
 
 <div class="card shadow h-100">
-    <h2 class="card-header">
-        User details
-    </h2>
+    <div class="card-header">
+        <div class="d-flex flex-row w-100">
+            <div class="flex-grow-1 align-self-center">
+                <h2 class="mb-0">
+                    User details
+                </h2>
+            </div>
+            <div class="align-self-center">
+                <CopyItemButton TextToCopy="@GetCopyText()" />
+            </div>
+        </div>
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-12">
