@@ -28,15 +28,14 @@ public partial class CopyItemButton : ComponentBase
     {
         if (_copyInProgress is false)
         {
-            await _copyItemButtonJsModule!.InvokeVoidAsync("copyTextToClipboard", Markdown.ToHtml(
-                    markdown: TextToCopy,
-                    pipeline: new MarkdownPipelineBuilder()
-                        .UsePipeTables()
-                        .UseGridTables()
-                        .UseSoftlineBreakAsHardlineBreak()
-                        .Build()
-                )
+            string convertedText = Markdown.ToHtml(
+                markdown: TextToCopy,
+                pipeline: new MarkdownPipelineBuilder()
+                    .UsePipeTables()
+                    .Build()
             );
+
+            await _copyItemButtonJsModule!.InvokeVoidAsync("copyTextToClipboard", convertedText);
 
             _copyInProgress = true;
             StateHasChanged();
