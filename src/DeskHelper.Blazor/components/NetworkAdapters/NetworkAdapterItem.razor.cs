@@ -22,7 +22,7 @@ public partial class NetworkAdapterItem : ComponentBase
 #if IsWindows
             .AppendLine($"| **Is adapter up?** | {(AdapterItem.InterfaceStatus is OperationalStatus.Up ? "Yes" : "No")}");
 #else
-            .AppendLine($"| **Is adapter up? | {(AdapterItem.InterfaceHasIPv4Address ? "Yes" : "No")}");
+            .AppendLine($"| **Is adapter up?** | {(AdapterItem.InterfaceHasIPv4Address ? "Yes" : "No")}");
 #endif
 
 #if IsWindows
