@@ -46,9 +46,7 @@
             "windows": {
                 "args": [
                     "build",
-                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary",
+                    "${workspaceFolder}/src/DeskHelper.Maui.Blazor/DeskHelper.Maui.Blazor.csproj",
                     "--framework",
                     "net6.0-windows10.0.19041"
                 ]
@@ -56,9 +54,7 @@
             "osx": {
                 "args": [
                     "build",
-                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary",
+                    "${workspaceFolder}/src/DeskHelper.Maui.Blazor/DeskHelper.Maui.Blazor.csproj",
                     "--framework",
                     "net6.0-maccatalyst"
                 ]
@@ -72,9 +68,9 @@
             "windows": {
                 "args": [
                     "publish",
-                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary",
+                    "${workspaceFolder}/src/DeskHelper.Maui.Blazor/DeskHelper.Maui.Blazor.csproj",
+                    "--configuration",
+                    "Release",
                     "--framework",
                     "net6.0-windows10.0.19041"
                 ]
@@ -82,9 +78,9 @@
             "osx": {
                 "args": [
                     "publish",
-                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary",
+                    "${workspaceFolder}/src/DeskHelper.Maui.Blazor/DeskHelper.Maui.Blazor.csproj",
+                    "--configuration",
+                    "Release",
                     "--framework",
                     "net6.0-maccatalyst"
                 ]
@@ -100,8 +96,7 @@
                     "watch",
                     "run",
                     "--project",
-                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
-                    "/property:GenerateFullPaths=true",
+                    "${workspaceFolder}/src/DeskHelper.Maui.Blazor/DeskHelper.Maui.Blazor.csproj",
                     "--framework",
                     "net6.0-windows10.0.19041"
                 ]
@@ -110,8 +105,7 @@
                 "args": [
                     "run",
                     "--project",
-                    "${workspaceFolder}/src/DeskHelper.Maui/DeskHelper.Maui.csproj",
-                    "/property:GenerateFullPaths=true",
+                    "${workspaceFolder}/src/DeskHelper.Maui.Blazor/DeskHelper.Maui.Blazor.csproj",
                     "--framework",
                     "net6.0-maccatalyst"
                 ]
