@@ -45,7 +45,12 @@ switch ($_platform) {
     }
 
     Default {
-        dotnet build "$($srcPath)" --framework "net6.0-windows10.0.19041.0" --configuration "Release" --nologo --output "$($buildOutputPath)"
+        dotnet publish "$($srcPath)" --framework "net6.0-windows10.0.19041.0" --configuration "Release" --nologo
+
+        $appPackagesPath = Join-Path -Path $srcPath -ChildPath "bin\Release\net6.0-windows10.0.19041.0\win10-x64\AppPackages"
+        $appPackagesItem = Get-ChildItem -Path $appPackagesPath | Sort-Object -Property "LastWriteTime" | Select-Object -Last 1
+
+        Copy-Item -Path $appPackagesItem -Destination $buildOutputPath -Recurse
         break
     }
 }
