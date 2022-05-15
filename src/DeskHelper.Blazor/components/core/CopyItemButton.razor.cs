@@ -14,10 +14,10 @@ public partial class CopyItemButton : ComponentBase
     public string TextToCopy { get; set; } = null!;
 
     [Parameter]
-    public string ButtonPrimaryColorClass { get; set; } = "btn-dark";
+    public string ButtonPrimaryColorClass { get; set; } = "btn-light";
 
     [Parameter]
-    public string ButtonOnCopyColorClass { get; set; } = "btn-success";
+    public string ButtonOnCopyColorClass { get; set; } = "btn-lightgreen";
 
     private bool _copyInProgress = false;
 
