@@ -1,6 +1,8 @@
 ﻿:root {
 	--bs-celestial-blue: #438bcc;
 	--bs-indigo: #214565;
+	--bs-metallic-blue: #3d5c78;
+	--bs-lightgreen: #68de88;
 }
 
 html, body {
@@ -13,6 +15,23 @@ body {
 
 .bg-indigo {
 	background-color: var(--bs-indigo);
+}
+
+.bg-metallic-blue {
+	background-color: var(--bs-metallic-blue);
+}
+
+.border-metallic-blue {
+	border-color: var(--bs-metallic-blue);
+}
+
+.bg-lightgreen {
+	background-color: var(--bs-lightgreen);
+}
+
+.btn-lightgreen {
+	color: #000;
+	background-color: var(--bs-lightgreen);
 }
 
 .valid.modified:not([type=checkbox]) {
