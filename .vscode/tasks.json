@@ -103,9 +103,9 @@
             },
             "osx": {
                 "args": [
-                    "run",
-                    "--project",
+                    "build",
                     "${workspaceFolder}/src/DeskHelper.Maui.Blazor/DeskHelper.Maui.Blazor.csproj",
+                    "-t:Run",
                     "--framework",
                     "net6.0-maccatalyst"
                 ]
