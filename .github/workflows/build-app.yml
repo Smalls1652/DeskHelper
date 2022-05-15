@@ -6,6 +6,9 @@ on:
        os:
          required: true
          type: string
+       upload_artifacts:
+         type: boolean
+         required: false
 
 jobs:
   build-app:
@@ -32,3 +35,11 @@ jobs:
     - name: Build app
       shell: pwsh
       run: .\buildMaui.ps1
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      if: inputs.upload_artifacts == true
+      with:
+        name: build_${{ inputs.os }}
+        path: build/
+        retention-days: 3
