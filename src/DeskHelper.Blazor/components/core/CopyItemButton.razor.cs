@@ -25,7 +25,7 @@ public partial class CopyItemButton : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _copyItemButtonJsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/DeskHelper.Blazor/components/core/CopyItemButton.razor.js");
+        _copyItemButtonJsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./components/core/CopyItemButton.razor.js");
 
         await base.OnInitializedAsync();
     }
