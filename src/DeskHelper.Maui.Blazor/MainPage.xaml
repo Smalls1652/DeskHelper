@@ -8,7 +8,7 @@
              BackgroundColor="{DynamicResource PageBackgroundColor}"
              Title="DeskHelper">
 
-    <b:BlazorWebView HostPage="wwwroot/index.html">
+    <b:BlazorWebView HostPage="wwwroot/_content/DeskHelper.Blazor/index.html">
         <b:BlazorWebView.RootComponents>
             <b:RootComponent Selector="#app" ComponentType="{x:Type blazorpages:RouterPage}" />
         </b:BlazorWebView.RootComponents>
