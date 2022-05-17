@@ -14,7 +14,7 @@ if (Test-Path -Path $nodeModulesPath) {
 
 Start-Process -FilePath "npm" -ArgumentList @("install") -Wait -NoNewWindow -WorkingDirectory $scriptRoot
 
-foreach ($srcPathItem in @("src\DeskHelper.Wpf", "src\DeskHelper.Maui.Blazor")) {
+foreach ($srcPathItem in @("src\DeskHelper.Wpf", "src\DeskHelper.Blazor")) {
     $bootstrapCssPath = Join-Path -Path $scriptRoot -ChildPath "node_modules\bootstrap\dist\css\bootstrap.min.css"
     $bootstrapCssMapPath = Join-Path -Path $scriptRoot -ChildPath "node_modules\bootstrap\dist\css\bootstrap.min.css.map"
     $bootstrapOutPath = Join-Path -Path $scriptRoot -ChildPath "$($srcPathItem)\wwwroot\css\bootstrap\"
