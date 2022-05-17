@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/src/DeskHelper.Lib"
+    target-branch: "development"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependency update"
+  
+  - package-ecosystem: "nuget"
+    directory: "/src/DeskHelper.Blazor"
+    target-branch: "development"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependency update"
+  
+  - package-ecosystem: "nuget"
+    directory: "/src/DeskHelper.Maui.Blazor"
+    target-branch: "development"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependency update"
