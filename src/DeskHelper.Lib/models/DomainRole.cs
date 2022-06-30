@@ -1,5 +1,8 @@
 namespace DeskHelper.Lib.Models;
 
+/// <summary>
+/// The domain role of the computer.
+/// </summary>
 public enum DomainRole : ushort
 {
     StandaloneWorkstation = 0,

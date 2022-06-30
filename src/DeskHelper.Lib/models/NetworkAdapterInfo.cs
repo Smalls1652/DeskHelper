@@ -10,6 +10,9 @@ using SmallsOnline.Subnetting.Lib.Models;
 
 namespace DeskHelper.Lib.Models;
 
+/// <summary>
+/// Contains info about a network adapter.
+/// </summary>
 public class NetworkAdapterInfo
 {
     public NetworkAdapterInfo(NetworkInterface networkInterface)
@@ -42,31 +45,69 @@ public class NetworkAdapterInfo
         InterfaceStatus = networkInterface.OperationalStatus;
     }
 
+    /// <summary>
+    /// The ID of the network adapter.
+    /// </summary>
     public string InterfaceId { get; set; }
 
+    /// <summary>
+    /// The name of the network adapter.
+    /// </summary>
     public string InterfaceName { get; set; }
 
+    /// <summary>
+    /// The MAC address of the network adapter.
+    /// </summary>
     public string InterfaceMACAddress { get; set; }
 
+    /// <summary>
+    /// Whether the network adapter is a physical adapter or not.
+    /// </summary>
     public bool InterfaceIsPhysical { get; set; }
 
+    /// <summary>
+    /// The IPv4 address of the network adapter.
+    /// </summary>
     public IPAddress? InterfaceIPv4Address { get; set; }
 
+    /// <summary>
+    /// The subnet mask of the network adapter.
+    /// </summary>
     public IPAddress? InterfaceSubnetMask { get; set; }
 
+    /// <summary>
+    /// The IPv4 gateway address of the network adapter.
+    /// </summary>
     public IPAddress? InterfaceIPv4Gateway { get; set; }
 
+    /// <summary>
+    /// Information about the subnet the IPv4 address is in.
+    /// </summary>
     public IPv4Subnet? InterfaceSubnetInfo { get; set; }
 
+    /// <summary>
+    /// The DNS servers configured for the network adapter.
+    /// </summary>
     public List<IPAddress>? InterfaceDNSServers { get; set; }
 
+    /// <summary>
+    /// The current status of the network adapter.
+    /// </summary>
     public OperationalStatus InterfaceStatus { get; set; }
 
+    /// <summary>
+    /// Whether the network adapter has an IPv4 address or not.
+    /// </summary>
     public bool InterfaceHasIPv4Address
     {
         get => InterfaceIPv4Address is not null;
     }
 
+    /// <summary>
+    /// Parse the IPv4 addresses from the IP interface properties.
+    /// </summary>
+    /// <param name="interfaceProperties">Properties of the network adapter</param>
+    /// <returns>A collection of dictonary objects with information about the IPv4 addresses.</returns>
     private static List<Dictionary<string, IPAddress>> GetIPv4AddressesFromProperties(IPInterfaceProperties interfaceProperties)
     {
         List<Dictionary<string, IPAddress>> ipAddresses = new();
@@ -94,6 +135,11 @@ public class NetworkAdapterInfo
         return ipAddresses;
     }
 
+    /// <summary>
+    /// Get the IP addresses of the DNS servers for the network adapter.
+    /// </summary>
+    /// <param name="interfaceProperties">Properties of the network adapter</param>
+    /// <returns>A collection of DNS server IP addresses.</returns>
     private static List<IPAddress> GetDNSServersFromProperties(IPInterfaceProperties interfaceProperties)
     {
         List<IPAddress> dnsServers = new();
@@ -109,6 +155,11 @@ public class NetworkAdapterInfo
         return dnsServers;
     }
 
+    /// <summary>
+    /// Get IPv4 gateway addresses for the network adapter.
+    /// </summary>
+    /// <param name="interfaceProperties">Properties of the network adapter</param>
+    /// <returns>A collection of IPv4 addresses.</returns>
     private static List<IPAddress> GetGatewaysFromProperties(IPInterfaceProperties interfaceProperties)
     {
         List<IPAddress> gatewayAddresses = new();
@@ -124,6 +175,11 @@ public class NetworkAdapterInfo
         return gatewayAddresses;
     }
 
+    /// <summary>
+    /// Convert the physical address (MAC address) to a string.
+    /// </summary>
+    /// <param name="physicalAddress">A physical address (MAC address)</param>
+    /// <returns>A string of the physical/MAC address.</returns>
     private static string ConvertPhysicalAddressToString(PhysicalAddress physicalAddress)
     {
         string interfaceBaseMACAddressString = physicalAddress.ToString();
@@ -139,6 +195,11 @@ public class NetworkAdapterInfo
         return string.Join(":", interfaceMACAddressOctets);
     }
 
+    /// <summary>
+    /// Get whether a network adapter is a physical adapter or not.
+    /// </summary>
+    /// <param name="macAddress">A string representation of a MAC address.</param>
+    /// <returns>Whether a network adapter is physical</returns>
     private static bool GetIsInterfacePhysical(string macAddress)
     {
 #if IsWindows

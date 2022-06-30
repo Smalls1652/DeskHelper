@@ -3,6 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace DeskHelper.Lib.Models;
 
+/// <summary>
+/// Information about the Azure AD status of the computer.
+/// </summary>
 public class AadStatus
 {
     public AadStatus()
@@ -19,25 +22,41 @@ public class AadStatus
         }
     }
 
+    /// <summary>
+    /// Whether the computer is joined to an Azure AD tenant.
+    /// </summary>
     public bool AzureAdJoined
     {
         get => _azureAdJoined;
     }
+
+    /// <summary>
+    /// Whether the computer is registered to an Azure AD tenant.
+    /// </summary>
     public bool EnterpriseJoined
     {
         get => _enterpriseJoined;
     }
 
+    /// <summary>
+    /// Whether computer is joined to an AD domain.
+    /// </summary>
     public bool DomainJoined
     {
         get => _domainJoined;
     }
 
+    /// <summary>
+    /// The Azure AD device ID for the computer.
+    /// </summary>
     public string? DeviceId
     {
         get => _deviceId;
     }
 
+    /// <summary>
+    /// The Azure AD tenant ID for the computer.
+    /// </summary>
     public string? TenantId
     {
         get => _tenantId;
@@ -51,6 +70,10 @@ public class AadStatus
 
     private string? _dsregcmdOutput;
 
+    /// <summary>
+    /// Get the output of the dsregcmd CLI tool.
+    /// </summary>
+    /// <returns>The output of the dsregcmd CLI tool.</returns>
     private static string? GetDsregcmdStatusOutput()
     {
         Task<string?> getDsregcmdStatusTask = Task.Run(async () => await GetDsregcmdStatusOutputAsync());
@@ -60,6 +83,10 @@ public class AadStatus
         return getDsregcmdStatusTask.Result;
     }
 
+    /// <summary>
+    /// Get the output of the dsregcmd CLI tool.
+    /// </summary>
+    /// <returns>The output of the dsregcmd CLI tool.</returns>
     private static async Task<string?> GetDsregcmdStatusOutputAsync()
     {
         using Process process = new();
@@ -82,6 +109,9 @@ public class AadStatus
         return dsregcmdStatus;
     }
 
+    /// <summary>
+    /// Set whether the computer is joined to an Azure AD tenant.
+    /// </summary>
     private void GetAzureAdJoinedStatus()
     {
         Regex joinedStatusRegex = new("AzureAdJoined : (?'joinStatus'YES|NO)");
@@ -102,6 +132,9 @@ public class AadStatus
         }
     }
 
+    /// <summary>
+    /// Set whether the computer is registered to an Azure AD tenant.
+    /// </summary>
     private void GetEnterpriseJoinedStatus()
     {
         Regex joinedStatusRegex = new("EnterpriseJoined : (?'joinStatus'YES|NO)");
@@ -122,6 +155,9 @@ public class AadStatus
         }
     }
 
+    /// <summary>
+    /// Set whether the computer is joined to an AD domain.
+    /// </summary>
     private void GetDomainJoinedStatus()
     {
         Regex joinedStatusRegex = new("DomainJoined : (?'joinStatus'YES|NO)");
@@ -142,6 +178,9 @@ public class AadStatus
         }
     }
 
+    /// <summary>
+    /// Set the Azure AD device ID for the computer.
+    /// </summary>
     private void GetDeviceId()
     {
         Regex deviceIdRegex = new("DeviceId : (?'deviceId'(?:[A-Za-z0-9]+(?:-|)){5}|)");
@@ -154,6 +193,9 @@ public class AadStatus
         }
     }
 
+    /// <summary>
+    /// Set the Azure AD tenant ID for the computer.
+    /// </summary>
     private void GetTenantId()
     {
         Regex tenantIdRegex = new("TenantId : (?'tenantId'(?:[A-Za-z0-9]+(?:-|)){5}|)");

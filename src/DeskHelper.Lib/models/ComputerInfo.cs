@@ -7,6 +7,9 @@ using System.Net.NetworkInformation;
 
 namespace DeskHelper.Lib.Models;
 
+/// <summary>
+/// Contains data about a computer.
+/// </summary>
 public class ComputerInfo
 {
     public ComputerInfo()
@@ -26,41 +29,65 @@ public class ComputerInfo
         _networkAdapters = GetNetworkAdapters();
     }
 
+    /// <summary>
+    /// The hostname of the computer.
+    /// </summary>
     public string HostName
     {
         get => _hostName;
     }
 
+    /// <summary>
+    /// The DNS name of the computer.
+    /// </summary>
     public string DNSName
     {
         get => _dnsName;
     }
 
+    /// <summary>
+    /// The domain name the computer is joined to.
+    /// </summary>
     public string? ComputerDomainName
     {
         get => _computerDomainName;
     }
 
+    /// <summary>
+    /// Whether the computer is joined to an AD domain.
+    /// </summary>
     public bool ComputerIsDomainJoined
     {
         get => _computerIsDomainJoined;
     }
 
+    /// <summary>
+    /// The current user. Specifically the current user executing the program.
+    /// </summary>
     public string CurrentUser
     {
         get => Environment.UserName;
     }
 
+    /// <summary>
+    /// The computer's Azure AD info collected through the dsregcmd CLI tool.
+    /// </summary>
     public AadStatus? AzureAdInfo
     {
         get => _azureAdInfo;
     }
 
+    /// <summary>
+    /// The computer's operating system info.
+    /// </summary>
     public OperatingSystemInfo OSInfo
     {
         get => _osInfo;
     }
 
+    /// <summary>
+    /// A list of network adapters/interfaces on the computer.
+    /// </summary>
     public List<NetworkAdapterInfo> NetworkAdapters
     {
         get => _networkAdapters;
@@ -74,11 +101,19 @@ public class ComputerInfo
     private readonly OperatingSystemInfo _osInfo = new();
     private readonly List<NetworkAdapterInfo> _networkAdapters = null!;
 
+    /// <summary>
+    /// Get the computer's hostname.
+    /// </summary>
+    /// <returns>The hostname of the computer.</returns>
     private static string GetComputerHostName()
     {
         return Environment.MachineName;
     }
 
+    /// <summary>
+    /// Get the computer's DNS name.
+    /// </summary>
+    /// <returns>The DNS name of the computer.</returns>
     private static string GetComputerDNSName()
     {
         return Dns.GetHostName();
@@ -86,6 +121,11 @@ public class ComputerInfo
 
 #if IsWindows
 #pragma warning disable CA1416 // Validate platform compatibility
+
+    /// <summary>
+    /// Get the AD domain name the computer is joined to.
+    /// </summary>
+    /// <returns>The domain name the computer is joined to.</returns>
     private static string GetComputerDomainName()
     {
         using ManagementObject computerSystemProps = new(
@@ -95,6 +135,10 @@ public class ComputerInfo
         return (string)computerSystemProps["Domain"];
     }
 
+    /// <summary>
+    /// Get whether the computer is joined to an AD domain.
+    /// </summary>
+    /// <returns>Whether the computer is joined to an AD domain.</returns>
     private static bool GetIsComputerDomainJoined()
     {
         using ManagementObject computerSystemProps = new(
@@ -118,6 +162,10 @@ public class ComputerInfo
 #pragma warning restore CA1416 // Validate platform compatibility
 #endif
 
+    /// <summary>
+    /// Get a list of network adapters/interfaces on the computer.
+    /// </summary>
+    /// <returns>A collection of network adapters.</returns>
     private static List<NetworkAdapterInfo> GetNetworkAdapters()
     {
         List<NetworkAdapterInfo> networkAdapters = new();
