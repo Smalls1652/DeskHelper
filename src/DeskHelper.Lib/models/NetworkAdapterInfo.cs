@@ -1,4 +1,5 @@
 ﻿#if IsWindows
+// Available on Windows only.
 using System.Management;
 #endif
 
@@ -109,24 +110,31 @@ public class NetworkAdapterInfo
     /// <returns>A collection of dictonary objects with information about the IPv4 addresses.</returns>
     private static List<Dictionary<string, IPAddress>> GetIPv4AddressesFromProperties(IPInterfaceProperties interfaceProperties)
     {
+        // Initialize the list of IPv4 addresses.
         List<Dictionary<string, IPAddress>> ipAddresses = new();
 
+        // Loop through each IPv4 address in the 'UnicastAddresses' property.
         foreach (UnicastIPAddressInformation addressInformationItem in interfaceProperties.UnicastAddresses)
         {
             if (addressInformationItem.Address.AddressFamily is AddressFamily.InterNetwork)
             {
+                // If the address is IPv4, create a dictonary object with
+                // the IPv4 address and it's subnet mask.
                 Dictionary<string, IPAddress> ipAddressDict = new()
                 {
+                    // Add the IPv4 address.
                     {
                         "IPAddress",
                         addressInformationItem.Address
                     },
+                    // Add the subnet mask.
                     {
                         "SubnetMask",
                         addressInformationItem.IPv4Mask
                     }
                 };
 
+                // Add the dictonary object to the list.
                 ipAddresses.Add(ipAddressDict);
             }
         }
@@ -141,12 +149,15 @@ public class NetworkAdapterInfo
     /// <returns>A collection of DNS server IP addresses.</returns>
     private static List<IPAddress> GetDNSServersFromProperties(IPInterfaceProperties interfaceProperties)
     {
+        // Initialize the list of DNS servers.
         List<IPAddress> dnsServers = new();
 
+        // Loop through each DNS server in the 'DnsAddresses' property.
         foreach (IPAddress ipAddressItem in interfaceProperties.DnsAddresses)
         {
             if (ipAddressItem.AddressFamily is AddressFamily.InterNetwork)
             {
+                // If the address is IPv4, add it to the list.
                 dnsServers.Add(ipAddressItem);
             }
         }
@@ -161,12 +172,15 @@ public class NetworkAdapterInfo
     /// <returns>A collection of IPv4 addresses.</returns>
     private static List<IPAddress> GetGatewaysFromProperties(IPInterfaceProperties interfaceProperties)
     {
+        // Initialize the list of gateway addresses.
         List<IPAddress> gatewayAddresses = new();
 
+        // Loop through each gateway in the 'GatewayAddresses' property.
         foreach (GatewayIPAddressInformation gatewayItem in interfaceProperties.GatewayAddresses)
         {
             if (gatewayItem.Address.AddressFamily is AddressFamily.InterNetwork)
             {
+                // If the address is IPv4, add it to the list.
                 gatewayAddresses.Add(gatewayItem.Address);
             }
         }
@@ -181,16 +195,25 @@ public class NetworkAdapterInfo
     /// <returns>A string of the physical/MAC address.</returns>
     private static string ConvertPhysicalAddressToString(PhysicalAddress physicalAddress)
     {
+        // Convert the physical address to a string.
         string interfaceBaseMACAddressString = physicalAddress.ToString();
+
+        // Get the length of the string.
         int interfaceBaseMACAddressStringLength = interfaceBaseMACAddressString.Length;
+
+        // Initialize a list of strings to hold each octect of the MAC address.
         List<string> interfaceMACAddressOctets = new();
 
+        // Loop through each octect of the MAC address by splitting the string into two characters.
         for (int i = 0; i < interfaceBaseMACAddressStringLength; i += 2)
         {
+            // Get the two characters by the substring of the current loop index and the length of MAC address string.
+            // Then add octect string to the list.
             string octetString = interfaceBaseMACAddressString.Substring(i, Math.Min(2, interfaceBaseMACAddressStringLength - 1));
             interfaceMACAddressOctets.Add(octetString);
         }
 
+        // Join the octect strings into a single string separated by a colon.
         return string.Join(":", interfaceMACAddressOctets);
     }
 
@@ -203,40 +226,50 @@ public class NetworkAdapterInfo
     {
 #if IsWindows
 #pragma warning disable CA1416 // Validate platform compatibility
+        // Initialize the list of physical adapters.
+        // Then run a CIM/WMI query on the 'Win32_NetworkAdapter' class.
         List<ManagementObject> netAdapters = new();
         using (ManagementObjectSearcher objSearcher = new($"SELECT MACAddress,PhysicalAdapter FROM Win32_NetworkAdapter"))
         {
+            // Loop through each item returned from the query.
             foreach (ManagementObject managementObject in objSearcher.Get())
             {
+                // Add the item to the list.
                 netAdapters.Add(managementObject);
             }
         }
 
         bool isPhysical;
-
-            ManagementObject netAdapterProps = netAdapters.Find(
-                (ManagementObject item) => (string)item["MACAddress"] == macAddress
-            )!;
+        // Find the adapter with the matching MAC address.
+        ManagementObject netAdapterProps = netAdapters.Find(
+            (ManagementObject item) => (string)item["MACAddress"] == macAddress
+        )!;
 
         try
         {
             if (netAdapterProps is not null)
             {
+                // If 'netAdapterProps' is not null,
+                // get the value of the 'PhysicalAdapter' property.
                 isPhysical = (bool)netAdapterProps["PhysicalAdapter"];
             }
             else
             {
+                // Otherwise, set the value to false.
                 isPhysical = false;
             }
         }
         catch (NullReferenceException)
         {
+            // If a 'NullReferenceException' is thrown, then set the value to false.
             isPhysical = false;
         }
 #pragma warning restore CA1416 // Validate platform compatibility
 
         return isPhysical;
 #else
+        // Return false if not on Windows.
+        // Note: Will need to look into ways to determine this info if on macOS.
         return false;
 #endif
     }

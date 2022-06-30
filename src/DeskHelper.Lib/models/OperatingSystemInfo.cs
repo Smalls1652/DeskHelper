@@ -1,4 +1,5 @@
 #if IsWindows
+// Available on Windows only.
 using Microsoft.Win32;
 #endif
 
@@ -41,14 +42,19 @@ public class OperatingSystemInfo
 
         if (OperatingSystem.IsWindows())
         {
+            // If the method 'IsWindows()' returns true,
+            // then set the OS name to 'Windows'.
             osName = "Windows";
         }
         else if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
         {
+            // If the methods 'IsMacOS()' or 'IsMacCatalyst()' return true,
+            // then set the OS name to 'macOS'.
             osName = "macOS";
         }
         else
         {
+            // Otherwise, set the OS name to 'Not supported'.
             osName = "Not supported";
         }
 
@@ -61,10 +67,14 @@ public class OperatingSystemInfo
     /// <returns>The version of the operating system.</returns>
     private static Version GetOperatingSystemVersion()
     {
+        // Get the OS version from the 'OSVersion' environment variable.
         Version osVersion = Environment.OSVersion.Version;
 
 #if IsWindows
+// Available on Windows only.
 #pragma warning disable CA1416 // Validate platform compatibility
+        // Get the current build number from the 'UBR' property in the 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion' registry key.
+        // Then update the OS version to include the build number as well.
         int osBuildNumber = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "UBR", 0)!;
         osVersion = new(osVersion.Major, osVersion.Minor, osVersion.Build, osBuildNumber);
 #pragma warning restore CA1416 // Validate platform compatibility

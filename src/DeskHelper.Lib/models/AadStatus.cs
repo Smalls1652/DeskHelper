@@ -76,8 +76,8 @@ public class AadStatus
     /// <returns>The output of the dsregcmd CLI tool.</returns>
     private static string? GetDsregcmdStatusOutput()
     {
+        // Run the 'GetDsregcmdStatusOutputAsync()' method in a new thread and wait for it to finish.
         Task<string?> getDsregcmdStatusTask = Task.Run(async () => await GetDsregcmdStatusOutputAsync());
-
         getDsregcmdStatusTask.Wait();
 
         return getDsregcmdStatusTask.Result;
@@ -89,8 +89,11 @@ public class AadStatus
     /// <returns>The output of the dsregcmd CLI tool.</returns>
     private static async Task<string?> GetDsregcmdStatusOutputAsync()
     {
+        // Create a new 'Process' object.
         using Process process = new();
 
+        // Set the process's 'StartInfo' properties.
+        // Configured to run 'dsregcmd.exe /status', redirect the output, and hide the window.
         process.StartInfo = new()
         {
             FileName = "dsregcmd.exe",
@@ -100,10 +103,13 @@ public class AadStatus
             CreateNoWindow = true
         };
 
+        // Start the process.
         process.Start();
 
+        // Read the output of the process.
         string? dsregcmdStatus = await process.StandardOutput.ReadToEndAsync();
 
+        // Wait for the process to exit.
         await process.WaitForExitAsync();
 
         return dsregcmdStatus;
@@ -114,20 +120,23 @@ public class AadStatus
     /// </summary>
     private void GetAzureAdJoinedStatus()
     {
+        // Initialize the regex pattern to match the 'AzureAdJoined' line.
+        // Then run the regex on the '_dsregcmdOutput' string.
         Regex joinedStatusRegex = new("AzureAdJoined : (?'joinStatus'YES|NO)");
-
         Match joinedStatusMatch = joinedStatusRegex.Match(_dsregcmdOutput!);
 
         if (joinedStatusMatch.Success)
         {
+            // If the regex match was successful, then parse the value of the 'joinStatus' group.
             _azureAdJoined = joinedStatusMatch.Groups["joinStatus"].Value switch
             {
-                "YES" => true,
-                _ => false
+                "YES" => true, // If the value is 'YES', then the computer is joined to an Azure AD tenant.
+                _ => false // Otherwise, the computer is not joined to an Azure AD tenant.
             };
         }
         else
         {
+            // Otherwise set the '_azureAdJoined' property to 'false'.
             _azureAdJoined = false;
         }
     }
@@ -137,20 +146,23 @@ public class AadStatus
     /// </summary>
     private void GetEnterpriseJoinedStatus()
     {
+        // Initialize the regex pattern to match the 'EnterpriseJoined' line.
+        // Then run the regex on the '_dsregcmdOutput' string.
         Regex joinedStatusRegex = new("EnterpriseJoined : (?'joinStatus'YES|NO)");
-
         Match joinedStatusMatch = joinedStatusRegex.Match(_dsregcmdOutput!);
 
         if (joinedStatusMatch.Success)
         {
+            // If the regex match was successful, then parse the value of the 'joinStatus' group.
             _enterpriseJoined = joinedStatusMatch.Groups["joinStatus"].Value switch
             {
-                "YES" => true,
-                _ => false
+                "YES" => true, // If the value is 'YES', then the computer is registered to an Azure AD tenant.
+                _ => false // Otherwise, the computer is not registered to an Azure AD tenant.
             };
         }
         else
         {
+            // Otherwise set the '_enterpriseJoined' property to 'false'.
             _enterpriseJoined = false;
         }
     }
@@ -160,20 +172,23 @@ public class AadStatus
     /// </summary>
     private void GetDomainJoinedStatus()
     {
+        // Initialize the regex pattern to match the 'DomainJoined' line.
+        // Then run the regex on the '_dsregcmdOutput' string.
         Regex joinedStatusRegex = new("DomainJoined : (?'joinStatus'YES|NO)");
-
         Match joinedStatusMatch = joinedStatusRegex.Match(_dsregcmdOutput!);
 
         if (joinedStatusMatch.Success)
         {
+            // If the regex match was successful, then parse the value of the 'joinStatus' group.
             _domainJoined = joinedStatusMatch.Groups["joinStatus"].Value switch
             {
-                "YES" => true,
-                _ => false
+                "YES" => true, // If the value is 'YES', then the computer is joined to an AD domain.
+                _ => false // Otherwise, the computer is not joined to an AD domain.
             };
         }
         else
         {
+            // Otherwise set the '_domainJoined' property to 'false'.
             _domainJoined = false;
         }
     }
@@ -183,12 +198,14 @@ public class AadStatus
     /// </summary>
     private void GetDeviceId()
     {
+        // Initialize the regex pattern to match the 'DeviceId' line.
+        // Then run the regex on the '_dsregcmdOutput' string.
         Regex deviceIdRegex = new("DeviceId : (?'deviceId'(?:[A-Za-z0-9]+(?:-|)){5}|)");
-
         Match deviceIdMatch = deviceIdRegex.Match(_dsregcmdOutput!);
 
         if (deviceIdMatch.Success)
         {
+            // If the regex match was successful, then parse the value of the 'deviceId' group.
             _deviceId = deviceIdMatch.Groups["deviceId"].Value;
         }
     }
@@ -198,12 +215,14 @@ public class AadStatus
     /// </summary>
     private void GetTenantId()
     {
+        // Initialize the regex pattern to match the 'TenantId' line.
+        // Then run the regex on the '_dsregcmdOutput' string.
         Regex tenantIdRegex = new("TenantId : (?'tenantId'(?:[A-Za-z0-9]+(?:-|)){5}|)");
-
         Match tenantIdMatch = tenantIdRegex.Match(_dsregcmdOutput!);
 
         if (tenantIdMatch.Success)
         {
+            // If the regex match was successful, then parse the value of the 'tenantId' group.
             _tenantId = tenantIdMatch.Groups["tenantId"].Value;
         }
     }
