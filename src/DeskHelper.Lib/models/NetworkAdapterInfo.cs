@@ -5,7 +5,6 @@ using System.Management;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Text;
 using SmallsOnline.Subnetting.Lib.Models;
 
 namespace DeskHelper.Lib.Models;
